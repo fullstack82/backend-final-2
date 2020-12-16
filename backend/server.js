@@ -63,9 +63,7 @@ app.post('/api/upload', (req, res) => {
 //------------Reservations-----------------------------------------------------------------------------------------------------------------------------------------------------
 app.get('/api/reservations', reservationsControllers.getReservations)
 
-app.post('/send-email', (req, res) => {
-    console.log('Email enviado')
-});
+
 // 3. Calling my port.--------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.listen(HTTP_PORT, () => console.log(`Listening at the port ${HTTP_PORT}`));

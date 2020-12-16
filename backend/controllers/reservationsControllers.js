@@ -10,7 +10,7 @@ async function getReservations(req, res) {
         res.status(500);
         res.send({ error: err.message });
     }
-}
+};
 
 
 
