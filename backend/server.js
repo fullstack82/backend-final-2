@@ -11,6 +11,7 @@ const fileupload = require('express-fileupload')
 
 
 const {
+    reservationsControllers,
     usersControllers,
     commentsControllers,
 } = require('./controllers')
@@ -59,8 +60,8 @@ app.post('/api/upload', (req, res) => {
         return res.status(200).send({message: 'File upload'})
     })
 })
-//------------Email-----------------------------------------------------------------------------------------------------------------------------------------------------
-
+//------------Reservations-----------------------------------------------------------------------------------------------------------------------------------------------------
+app.get('/api/reservations', reservationsControllers.getReservations)
 
 app.post('/send-email', (req, res) => {
     console.log('Email enviado')
