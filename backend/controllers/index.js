@@ -3,11 +3,12 @@ const usersControllers = require('./usersControllers');
 const experiencesControllers = require('./experiencesControllers');
 const reservationsControllers = require('./reservationsControllers');
 const commentsControllers = require('./commentsControllers');
-
+const payControllers = require('./payControllers')
 // 2. Exporting my controllers
 module.exports = {
     usersControllers,
     experiencesControllers,
     reservationsControllers,
-    commentsControllers
+    commentsControllers,
+    payControllers
 };

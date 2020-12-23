@@ -1,5 +1,5 @@
 // 1. Modules required for my application.---------------------------------------------------------------------------------------------------------------------------------
-
+const Joi = require('joi')
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,16 +8,16 @@ const morgan = require('morgan');
 const app = express();
 const cors = require('cors');
 const fileupload = require('express-fileupload')
-
+const path = require('path')
 
 const {
     reservationsControllers,
     usersControllers,
     commentsControllers,
+    payControllers
 } = require('./controllers')
 const { validateAuthorization } = require('./middlewares');
 const experiencesControllers = require('./controllers/experiencesControllers');
-const { Router } = require('express');
 const { HTTP_PORT } = process.env;
 
 
@@ -28,10 +28,9 @@ app.use(fileupload())
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
-app.use('/uploads', express.static(__dirname + '/uploads' ))
-
-
-
+app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 // 2. Requests to my server: users, experiences,comments and reservations.--------------------------------------------------------------------------------------------
 
 //-----------Users----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,13 +54,22 @@ app.get('/api/experience/:id', experiencesControllers.getExperiencesById);
 app.post('/api/upload', (req, res) => {
     const EDfile = req.files.file
     EDfile.mv(`./uploads/${EDfile.name}`, err => {
-        if(err) return res.status(500).send({ message: err})
+        if (err) return res.status(500).send({ message: err })
 
-        return res.status(200).send({message: 'File upload'})
+        return res.status(200).send({ message: 'File upload' })
     })
 })
 //------------Reservations-----------------------------------------------------------------------------------------------------------------------------------------------------
 app.get('/api/reservations', reservationsControllers.getReservations)
+//app.post('/api/reservations', reservationsControllers.createReservations)
+
+app.post('/api/reservations', (req, res) => {
+    console.log(req.body)
+    res.send('recibido')
+});
+
+
+
 
 
 // 3. Calling my port.--------------------------------------------------------------------------------------------------------------------------------------------------
