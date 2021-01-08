@@ -1,7 +1,9 @@
 // 1.  Requiring the modules.-------------------------------------------------------------------------------------------------------------------------------------------
 const jwt = require('jsonwebtoken');
-
 const { database } = require('../structure');
+
+
+
 // 2. User validation is created.--------------------------------------------------------------------------------------------------------------------------------------
 async function validateAuthorization(req, res, next) {
     try {

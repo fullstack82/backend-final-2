@@ -15,38 +15,28 @@ async function getReservations(req, res) {
 
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*async function createReservations(req, res) {
+async function createReservations(req, res) {
     try {
-        const [reservationId] = req.params;
+        
         const { id } = req.auth;
-        const { reservation } = req.body;
+        const { reservation, experiencia } = req.body;
 
 
 
-        const schema = Joi.object({
+      /*  const schema = Joi.object({
             name: Joi.string(),
             surnames: Joi.string(),
             email: Joi.string(),
             card: Joi.number()
         });
 
-        await schema.validateAsync({ name, surnames, email, card });
+        await schema.validateAsync({ name, surnames, email, card });*/
+
+console.log([reservation, experiencia, id])
 
 
-        const selectQuery = 'SELECT * FROM reservations WHERE id = ?';
-        const [reservations] = await database.pool.query(selectQuery, reservationId)
-
-
-        if (!reservations || !reservations.length) {
-            const error = new Error('la reserva no existe');
-            error.code = 404;
-            throw error;
-        }
-
-
-
-        const insertQuery = 'INSERT INTO reservations( experiences INNER JOIN users on experiences.id = users.id) VALUES (?, ?)';
-        const [result] = await database.pool.query(insertQuery, [experiences, users]);
+        const insertQuery = 'INSERT INTO reservations( reservation_number, id_experiences, id_users, reservation_date) VALUES (?, ?, ?, ?)';
+        const [result] = await database.pool.query(insertQuery, [reservation, experiencia, id, new Date()]);
 
         const { insertId } = result;
         
@@ -62,11 +52,12 @@ async function getReservations(req, res) {
 
 
     } catch (error) {
+        console.log(error)
         res.status(error.code || 500);
-        res.send({ error: err.message })
+        res.send({ error: error.message })
 
     }
-};*/
+};
 
 
 

@@ -61,12 +61,12 @@ app.post('/api/upload', (req, res) => {
 })
 //------------Reservations-----------------------------------------------------------------------------------------------------------------------------------------------------
 app.get('/api/reservations', reservationsControllers.getReservations)
-//app.post('/api/reservations', reservationsControllers.createReservations)
+app.post('/api/reservations',validateAuthorization, reservationsControllers.createReservations)
 
-app.post('/api/reservations', (req, res) => {
+/*app.post('/api/reservations', (req, res) => {
     console.log(req.body)
     res.send('recibido')
-});
+});*/
 
 
 

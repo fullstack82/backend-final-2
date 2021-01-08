@@ -22,6 +22,7 @@ async function getUsers(req, res) {
 
 async function createUser(req, res) {
     try {
+
         const { name, surnames, email, userName, password } = req.body;
 
 
